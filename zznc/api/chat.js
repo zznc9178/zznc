@@ -1,22 +1,13 @@
-// api/chat.js
-// 部署到 Vercel 后，这个文件会自动变成一个后端 API
-// 你的 API Key 必须通过 Vercel 环境变量注入，不要写在这里！
-
-export default async function handler(req, res) {
-    // 只允许 POST 请求
-    if (req.method !== "POST") {
-        return res.status(405).json({ error: "只支持 POST 请求" });
-    }
-
+// api/chat.js — Cloudflare Pages Functions 版本
+export async function onRequestPost({ request, env }) {
     try {
-        const { messages } = req.body;
+        const { messages } = await request.json();
 
-        // 调用 DeepSeek API
         const response = await fetch("https://api.deepseek.com/v1/chat/completions", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${process.env.DEEPSEEK_API_KEY}`
+                "Authorization": `Bearer ${env.DEEPSEEK_API_KEY}`
             },
             body: JSON.stringify({
                 model: "deepseek-v4-flash",
@@ -26,17 +17,22 @@ export default async function handler(req, res) {
 
         const data = await response.json();
 
-        // 如果 DeepSeek 返回了错误
         if (data.error) {
-            return res.status(400).json({ error: data.error.message });
+            return new Response(JSON.stringify({ error: data.error.message }), {
+                status: 400,
+                headers: { "Content-Type": "application/json" }
+            });
         }
 
-        // 成功：把 AI 的回复返回给前端
-        return res.status(200).json({
-            reply: data.choices[0].message.content
+        return new Response(JSON.stringify({ reply: data.choices[0].message.content }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" }
         });
 
     } catch (error) {
-        return res.status(500).json({ error: "服务器错误：" + error.message });
+        return new Response(JSON.stringify({ error: "服务器错误：" + error.message }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" }
+        });
     }
 }
