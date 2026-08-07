@@ -23,16 +23,15 @@
             box-shadow: 0 4px 20px rgba(124,58,237,0.3);
             border-radius: 0 0 30px 30px;
         }
-        .hero .avatar{
-            width:80px;
-            height:80px;
-            background: rgba(255,255,255,0.15);
-            border-radius:50%;
-            margin:0 auto 12px;
-            font-size:50px;
-            line-height:80px;
-            backdrop-filter: blur(4px);
-        }
+.hero .avatar{
+    width:80px;
+    height:80px;
+    background-size: cover;
+    background-position: center;
+    border-radius:50%;
+    margin:0 auto 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
         .hero h1{ font-size:22px; margin-bottom:4px; }
         .hero p{ font-size:14px; opacity:0.85; }
 
@@ -109,7 +108,7 @@
 
 <!-- ========== 🎨 顶部横幅——改成你自己的 ========== -->
 <div class="hero">
-<div class="avatar">< img src="avatar.png" style="width:80px;height:80px;border-radius:50%;object-fit:cover;"></div>
+<div class="avatar" style="background-image:url('avatar.png');"></div>
     <h1>紫糯</h1>
     <p>一只毛茸茸的紫色小可爱 · 软糯温柔 · 喜欢交朋友</p >
 </div>
