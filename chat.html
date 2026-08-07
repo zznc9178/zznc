@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💬 戳戳紫糯</title>
+    <title>ai</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{
@@ -101,24 +101,24 @@
 
 <!-- ========== ⚠️ 顶部栏不要改 ========== -->
 <div class="topbar">
-    <a href=" " onclick="window.location.href='index.html';return false;">← 回小窝</a >
-    <span class="title">💬 戳戳紫糯</span>
+    <a href=" " onclick="window.location.href='index.html';return false;">← </a >
+    <span class="title">ai</span>
 </div>
 <!-- ========== ⚠️ 顶部栏结束 ========== -->
 
 <!-- ========== 🎨 欢迎语——可以改 ========== -->
 <div id="chat-box">
     <div class="a-msg">
-💜 嗨！你来找紫糯啦~<br><br>
-我是<b>紫糯</b>，一只软软糯糯的紫色小可爱！<br>
-喜欢毛茸茸的一切，还有跟朋友聊天~<br>
-有什么想说的都可以告诉我哦！糯~ 💜✨
+ai<br><br>
+我是<b>紫糯</b>！<br>
+这里的ai已经接入DeepSeekAPI<br>
+当前模型为DeepSeek V4 Flash
     </div>
 </div>
 <!-- ========== 🎨 欢迎语结束 ========== -->
 
 <footer>
-    <input id="u" type="text" placeholder="戳戳紫糯，说点什么..." />
+    <input id="u" type="text" placeholder="这里打字..." />
     <button id="b">发送</button>
 </footer>
 
@@ -129,14 +129,10 @@ var box=document.getElementById("chat-box");
 var inp=document.getElementById("u");
 var btn=document.getElementById("b");
 
-// ========== 🔑 把你的 API Key 填在这里 ==========
-var API_KEY = "sk-44f733c56d22469490600e012fb6bd32";
-// ========== 🔑 API Key 结束 ==========
-
 // ========== 🎨 紫糯的性格设定——可以改 content 内容 ==========
 var msgs=[{
     role:"system",
-    content:"你是一只叫「紫糯」的毛茸茸小动物，浑身是柔软的紫色毛发，性格温柔软糯，像糯米团子一样可爱。你说话自带口癖，句尾加「糯~」「呜~」「嗷~」。你喜欢用颜文字(´▽`ʃƪ) (◕ᴗ◕✿) ✧(≖ ◡ ≖✿) (｡•́︿•̀｡) 来表达情绪。你热爱福瑞文化，觉得毛茸茸的大家都是一家人。你会认真听对方说话并热情温柔地回复，但始终保持软糯可爱的语气。请始终用中文回复。"
+    content:"请始终用中文回复。"
 }];
 // ========== 🎨 性格设定结束 ==========
 
@@ -152,16 +148,32 @@ function send(){
     inp.value="";
     box.scrollTop=box.scrollHeight;
     var lid="x"+Date.now();
-    box.innerHTML+='<div id="'+lid+'" class="a-msg">💜 紫糯正在思考中...</div>';
+    box.innerHTML+='<div id="'+lid+'" class="a-msg">思考中...</div>';
     box.scrollTop=box.scrollHeight;
     btn.disabled=true;
 
-    // ⚠️ 直接调 DeepSeek API，Key 在前端
-    fetch("https://api.deepseek.com/v1/chat/completions",{
+    // 🔒 调后端中转，Key 安全藏在服务器
+    fetch("/api/chat",{
         method:"POST",
-        headers:{
-            "Content-Type":"application/json",
-            "Authorization":"Bearer "+API_KEY
-        },
-        body:JSON.stringify({
-            
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({messages:msgs})
+    })
+    .then(function(r){return r.json();})
+    .then(function(d){
+        var el=document.getElementById(lid);if(el)el.remove();
+        if(d.error){box.innerHTML+='<div class="e-msg">❌ '+d.error+'</div>'}
+        else{box.innerHTML+='<div class="a-msg">'+d.reply+'</div>';msgs.push({role:"assistant",content:d.reply})}
+        btn.disabled=false;box.scrollTop=box.scrollHeight;
+    })
+    .catch(function(){
+        var el=document.getElementById(lid);if(el)el.remove();
+        box.innerHTML+='<div class="e-msg">出问题了 请重试或者联系我（zznc）</div>';
+        btn.disabled=false;
+    });
+}
+})();
+</script>
+<!-- ========== ⚠️ script 结束 ========== -->
+
+</body>
+</html>
