@@ -3,71 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepSeek 助手</title>
+    <title>💜 紫糯的小窝</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Arial,sans-serif;background:#f0f2f5;height:100vh;display:flex;flex-direction:column}
-        header{background:#4f46e5;color:white;padding:16px;text-align:center;font-size:18px;font-weight:bold}
-        #chat-box{flex:1;overflow-y:auto;padding:16px}
-        .u-msg{background:#4f46e5;color:white;padding:10px 14px;border-radius:16px 16px 4px 16px;margin:8px 0;max-width:80%;margin-left:auto;word-break:break-word}
-        .a-msg{background:white;color:#333;padding:10px 14px;border-radius:16px 16px 16px 4px;margin:8px 0;max-width:80%;word-break:break-word;box-shadow:0 1px 3px rgba(0,0,0,.1)}
-        .e-msg{background:#fff0f0;color:#c00;padding:10px 14px;border-radius:16px;margin:8px 0;max-width:80%}
-        footer{padding:12px 16px;background:white;border-top:1px solid #e0e0e0;display:flex;gap:10px}
-        footer input{flex:1;padding:12px;border-radius:24px;border:1px solid #ccc;font-size:16px}
-        footer button{padding:12px 24px;border-radius:24px;background:#4f46e5;color:white;border:none;font-size:16px;cursor:pointer}
-        footer button:disabled{background:#ccc}
+        body{
+            font-family:Arial,sans-serif;
+            background: linear-gradient(180deg, #faf5ff 0%, #f3e8ff 30%, #ede9fe 60%, #faf5ff 100%);
+            background-attachment: fixed;
+            min-height:100vh;
+            padding-bottom:40px;
+        }
+
+        /* 顶部横幅 */
+        .hero{
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+            color:white;
+            padding:30px 20px 25px;
+            text-align:center;
+            box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+            border-radius: 0 0 30px 30px;
+        }
+        .hero .avatar{
+            width:80px;
+            height:80px;
+            background: rgba(255,255,255,0.15);
+            border-radius:50%;
+            margin:0 auto 12px;
+            font-size:50px;
+            line-height:80px;
+            backdrop-filter: blur(4px);
+        }
+        .hero h1{ font-size:22px; margin-bottom:4px; }
+        .hero p{ font-size:14px; opacity:0.85; }
+
+        /* 卡片网格 */
+        .card-grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap:14px;
+            padding:20px 16px;
+            max-width:500px;
+            margin:0 auto;
+        }
+        .card{
+            background:white;
+            border-radius:20px;
+            padding:20px 14px;
+            text-decoration:none;
+            color:#4c1d95;
+            box-shadow: 0 3px 12px rgba(124,58,237,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            text-align:center;
+            cursor:pointer;
+            border: 2px solid transparent;
+            position:relative;
+        }
+        .card:hover{
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(124,58,237,0.18);
+            border-color: #a78bfa;
+        }
+        .card .icon{ font-size:40px; margin-bottom:8px; }
+        .card .title{ font-size:15px; font-weight:bold; margin-bottom:4px; }
+        .card .desc{ font-size:12px; color:#999; line-height:1.4; }
+
+        /* 宽卡片占两格 */
+        .card.wide{ grid-column: span 2; }
+
+        /* 备用卡片样式 */
+        .card.placeholder-card{
+            opacity:0.55;
+            cursor:default;
+            border: 2px dashed #d8c9f0;
+        }
+        .card.placeholder-card:hover{
+            transform:none;
+            box-shadow: 0 3px 12px rgba(124,58,237,0.08);
+            border-color: #d8c9f0;
+        }
+        .coming-badge{
+            position:absolute;
+            top:10px;
+            right:10px;
+            background:#ede9fe;
+            color:#7c3aed;
+            font-size:10px;
+            padding:3px 8px;
+            border-radius:10px;
+            font-weight:bold;
+        }
+
+        /* 底部 */
+        .footer-text{
+            text-align:center;
+            color:#c4b5d9;
+            font-size:12px;
+            padding:10px;
+        }
     </style>
 </head>
 <body>
 
-<!-- ========== 🎨 下面是你可以随意修改的部分 ========== -->
-<header> DeepSeek zznc自费版</header>
-<div id="chat-box"><div class="a-msg">时间太晚了以后再完善w</div></div>
-<footer>
-    <input id="u" type="text" placeholder="这里打字" />
-    <button id="b">发送</button>
-</footer>
-<!-- ========== 🎨 上面是你可以随意修改的部分 ========== -->
+<!-- ========== 🎨 顶部横幅——改成你自己的 ========== -->
+<div class="hero">
+    <div class="avatar">💜</div>
+    <h1>紫糯</h1>
+    <p>一只毛茸茸的紫色小可爱 · 软糯温柔 · 喜欢交朋友</p >
+</div>
+<!-- ========== 🎨 顶部横幅结束 ========== -->
 
-<!-- ========== ⚠️ 下面的 script 一个字都不要改！⚠️ ========== -->
-<script>
-(function(){
-var box=document.getElementById("chat-box");
-var inp=document.getElementById("u");
-var btn=document.getElementById("b");
-var msgs=[{role:"system",content:"请始终使用中文回复。"}];
+<!-- ========== 🎨 卡片区——已确定的可以改图标/标题/描述，备用卡片随便改 ========== -->
+<div class="card-grid">
 
-btn.onclick=function(){send();};
-inp.onkeydown=function(e){if(e.key==="Enter")send();};
+    <!-- ✅ 设定简介（宽卡片，跳转 about.html） -->
+    <a href=" " class="card wide">
+        <div class="icon">📖</div>
+        <div class="title">设定简介</div>
+        <div class="desc">了解更多关于紫糯的故事、设定和喜好~</div>
+    </a >
 
-function send(){
-    var t=inp.value.trim();
-    if(!t)return;
-    box.innerHTML+='<div class="u-msg">'+t+'</div>';
-    msgs.push({role:"user",content:t});
-    inp.value="";
-    box.scrollTop=box.scrollHeight;
-    var lid="x"+Date.now();
-    box.innerHTML+='<div id="'+lid+'" class="a-msg">思考中...</div>';
-    box.scrollTop=box.scrollHeight;
-    btn.disabled=true;
-    fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:msgs})})
-    .then(function(r){return r.json()})
-    .then(function(d){
-        var el=document.getElementById(lid);if(el)el.remove();
-        if(d.error){box.innerHTML+='<div class="e-msg">❌ '+d.error+'</div>'}
-        else{box.innerHTML+='<div class="a-msg">'+d.reply+'</div>';msgs.push({role:"assistant",content:d.reply})}
-        btn.disabled=false;box.scrollTop=box.scrollHeight;
-    })
-    .catch(function(){
-        var el=document.getElementById(lid);if(el)el.remove();
-        box.innerHTML+='<div class="e-msg">❌ 网络错误</div>';
-        btn.disabled=false;
-    });
-}
-})();
-</script>
-<!-- ========== ⚠️ 上面的 script 一个字都不要改！⚠️ ========== -->
+    <!-- ✅ AI 聊天（跳转 chat.html） -->
+    <a href="chat.html" class="card">
+        <div class="icon">💬</div>
+        <div class="title">戳戳紫糯</div>
+        <div class="desc">跟紫糯聊聊天吧！</div>
+    </a >
 
-</body>
-</html>
+    <!-- ✅ 联系方式（跳转 contact.html） -->
+    <a href="contact.html" class="card">
+        <div class="icon">📬</div>
+        <div class="title">联系方式</div>
+        <div class="desc">各种平台找到紫糯~</div>
+    </a >
+
+    <!-- ⬜ 备用一（暂不跳转，以后想好了再改 href） -->
+    <a href="javascript:void(0)" class="card placeholder-card" onclick="return false;">
+        <span class="coming-badge">即将开放</span>
+        <div class="icon">📦</div>
+        <div class="title">备用一</div>
+        <div class="desc">还没想好放什么~</div>
+    </a >
+
+    <!-- ⬜ 备用二（暂不跳转） -->
+    <a href="javascript:void(0)" class="card placeholder-card" onclick="return false;">
+        <span class="coming-badge">即将开放</span>
+        <div class="icon">📦</div>
+        <div class="title">备用二</div>
+        <div class="desc">还没想好放什么~</div>
+    </a >
+
+    <!-- ⬜ 备用三（暂不跳转） -->
+    <a href="javascript:void(0)" class="card placeholder-card" onclick="return false;">
+        <span class="coming-badge">即将开放</span>
+        <div class="icon">📦</div>
+        <div class="title">备用三</div>
+        <div class="desc">还没想好放什么~</div>
+    </a >
+
+    <!-- ⬜ 备用四（暂不跳转） -->
+    <a hre
