@@ -35,7 +35,7 @@
 var box=document.getElementById("chat-box");
 var inp=document.getElementById("u");
 var btn=document.getElementById("b");
-var msgs=[];
+var msgs=[{role:"system",content:"请始终使用中文回复。"}];
 
 btn.onclick=function(){send();};
 inp.onkeydown=function(e){if(e.key==="Enter")send();};
