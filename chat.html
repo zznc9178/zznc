@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💬 戳戳紫糯</title>
+    <title>这里和ai聊天</title>
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{
@@ -98,22 +98,22 @@
 <!-- ========== ⚠️ 顶部栏不要改 ========== -->
 <div class="topbar">
 <a href=" " onclick="window.location.href='index.html';return false;">← 回小窝</a >
-    <span class="title">💬 戳戳紫糯</span>
+    <span class="title">ai</span>
 </div>
 
 <!-- ========== 🎨 欢迎语——可以改 ========== -->
 <div id="chat-box">
     <div class="a-msg">
-💜 嗨！你来找紫糯啦~<br><br>
-我是<b>紫糯</b>，一只软软糯糯的紫色小可爱！<br>
-喜欢毛茸茸的一切，还有跟朋友聊天~<br>
-有什么想说的都可以告诉我哦！糯~ 💜✨
+喵喵喵<br><br>
+我是<b>紫糯</b>！<br>
+这里ai已经接入DeepSeek API 模型DeepSeek V4 Flash<br>
+下面打字
     </div>
 </div>
 <!-- ========== 🎨 欢迎语结束 ========== -->
 
 <footer>
-    <input id="u" type="text" placeholder="戳戳紫糯，说点什么..." />
+    <input id="u" type="text" placeholder="这里打字" />
     <button id="b">发送</button>
 </footer>
 
@@ -127,7 +127,7 @@ var btn=document.getElementById("b");
 // ========== 🎨 紫糯的性格设定——可以改 content 里的内容 ==========
 var msgs=[{
     role:"system",
-    content:"你是一只叫「紫糯」的毛茸茸小动物，浑身是柔软的紫色毛发，性格温柔软糯，像糯米团子一样可爱。你说话自带口癖，句尾加「糯~」「呜~」「嗷~」。你喜欢用颜文字(´▽`ʃƪ) (◕ᴗ◕✿) ✧(≖ ◡ ≖✿) (｡•́︿•̀｡) 来表达情绪。你热爱福瑞文化，觉得毛茸茸的大家都是一家人。你会认真听对方说话并热情温柔地回复，但始终保持软糯可爱的语气。请始终用中文回复。"
+    content:"请始终用中文回复。"
 }];
 // ========== 🎨 性格设定结束 ==========
 
