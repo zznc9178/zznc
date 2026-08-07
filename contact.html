@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📬 联系紫糯</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{
+            font-family:Arial,sans-serif;
+            background: linear-gradient(180deg, #faf5ff 0%, #f3e8ff 30%, #ede9fe 60%, #faf5ff 100%);
+            background-attachment: fixed;
+            min-height:100vh;
+            padding:20px 16px 40px;
+        }
+        .back{
+            display:inline-block;
+            color:#7c3aed;
+            text-decoration:none;
+            font-size:14px;
+            margin-bottom:16px;
+        }
+        .back:hover{ text-decoration:underline; }
+        .card{
+            background:white;
+            border-radius:20px;
+            padding:24px 18px;
+            box-shadow: 0 3px 12px rgba(124,58,237,0.08);
+            max-width:500px;
+            margin:0 auto;
+            color:#4c1d95;
+            line-height:1.8;
+            font-size:15px;
+            border-left:4px solid #a78bfa;
+        }
+        .card h2{ font-size:20px; margin-bottom:14px; color:#6d28d9; }
+        .contact-item{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:14px 0;
+            border-bottom:1px solid #ede9fe;
+        }
+        .contact-item:last-child{ border-bottom:none; }
+        .contact-item .icon{ font-size:28px; min-width:40px; text-align:center; }
+        .contact-item .label{ font-size:12px; color:#999; }
+        .contact-item .value{ font-size:15px; font-weight:bold; }
+    </style>
+</head>
+<body>
+
+<!-- ========== ⚠️ 返回按钮不要改 ========== -->
+<a href=" " class="back">← 回到小窝</a >
+
+<div class="card">
+    <h2>📬 找到紫糯</h2>
+
+    <!-- ========== 🎨 联系方式——每条照格式改 ========== -->
+
+    <div class="contact-item">
+        <div class="icon">🐦</div>
+        <div>
+            <div class="label">Twitter / X</div>
+            <div class="value">@你的账号</div>
+        </div>
+    </div>
+
+    <div class="contact-item">
+        <div class="icon">🦋</div>
+        <div>
+            <div class="label">Bluesky</div>
+            <div class="value">@你的账号</div>
+        </div>
+    </div>
+
+    <div class="contact-item">
+        <div class="icon">✈️</div>
+        <div>
+            <div class="label">Telegram</div>
+            <div class="value">@你的账号</div>
+        </div>
+    </div>
+
+    <div class="contact-item">
+        <div class="icon">💬</div>
+        <div>
+            <div class="label">QQ</div>
+            <div class="value">你的QQ号</div>
+        </div>
+    </div>
+
+    <div class="contact-item">
+        <div class="icon">📧</div>
+        <div>
+            <div class="label">邮箱</div>
+            <div class="value">你的邮箱</div>
+        </div>
+    </div>
+
+    <!-- 想加更多平台？复制上面一整段 contact-item 就行 -->
+
+    <!-- ========== 🎨 联系方式结束 ========== -->
+</div>
+
+</body>
+</html>
